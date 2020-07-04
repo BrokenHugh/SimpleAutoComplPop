@@ -9,7 +9,7 @@ inoremap <expr> <silent> <Plug>(sacp_set_complete_done)         sacp#setComplete
 inoremap <expr> <silent> <Plug>(sacp_cache_fuzzy_omnicomplete)  sacpomni#begin()
 inoremap <expr> <silent> <Plug>(sacp_cache_fuzzy_bufferkeyword_complete)  sacpbuffer#begin()
 
-let s:sacpDefaultFileTypesEnable = { "php":1, "markdown":1, "text":1, "go":1, "html":1, "css":1, "javascript":1}
+let s:sacpDefaultFileTypesEnable = { "lua":1, "markdown":1, "text":1, "go":1, "html":1, "css":1, "javascript":1}
 let g:sacpDefaultFileTypesEnable = get(g:,'sacpDefaultFileTypesEnable',s:sacpDefaultFileTypesEnable)
 let g:sacpDefaultKeyMapEnable    = get(g:,'sacpDefaultKeyMapEnable',1)
 
@@ -38,14 +38,13 @@ if get(g:sacpDefaultFileTypesEnable,'html',0) == 1
 
 endif
 
-" php
-if get(g:sacpDefaultFileTypesEnable,'php',0) == 1
+" lua
+if get(g:sacpDefaultFileTypesEnable,'lua',0) == 1
 
 	" TODO auto filename completion pop up, for './'  '/' '../'
-	autocmd FileType php,php5,php7 call sacp#enableForThisBuffer({ "matches": [
-				\ { '=~': '\v[a-zA-Z]{4}$', 'feedkeys': "\<C-x>\<C-o>"},
-				\ { '=~': '::$'           , 'feedkeys': "\<C-x>\<C-o>"},
-				\ { '=~': '->$'           , 'feedkeys': "\<C-x>\<C-o>"},
+	autocmd FileType lua call sacp#enableForThisBuffer({ "matches": [
+				\ { '=~': '\v[a-zA-Z]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
+				\ { '=~': '\.$'           , 'feedkeys': "\<C-x>\<C-o>"},
 				\ ]
 				\ })
 
@@ -86,7 +85,7 @@ endif
 if get(g:sacpDefaultFileTypesEnable,'markdown',0) == 1
 
 	autocmd FileType markdown call sacp#enableForThisBuffer({ "matches": [
-				\ { '=~': '\v[a-zA-Z]{3}$', 'feedkeys': "\<Plug>(sacp_cache_fuzzy_bufferkeyword_complete)"},
+				\ { '=~': '\v[a-zA-Z]{2}$', 'feedkeys': "\<Plug>(sacp_cache_fuzzy_bufferkeyword_complete)"},
 				\ ]
 				\ })
 
@@ -96,7 +95,7 @@ endif
 if get(g:sacpDefaultFileTypesEnable,'text',0) == 1
 
 	autocmd FileType text call sacp#enableForThisBuffer({ "matches": [
-				\ { '=~': '\v[a-zA-Z]{3}$', 'feedkeys': "\<C-x>\<C-n>"},
+				\ { '=~': '\v[a-zA-Z]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
 				\ ]
 				\ })
 
